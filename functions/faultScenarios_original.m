@@ -81,7 +81,7 @@ fault_GenActuator                   = zeros(length(t),nT);
 %% Pre-defined fault scenarios
 % To define a new case change the 0 values (no fault) of the matrices of the different possible faults for the desired fault number 
 % at the desired time instants (using columns) and for the desired turbines (using rows). 
-% By way of example, fault_PitchActuator(5<t<50,2) = 1 sets a pitch actuator fault of type 1 (stuck at a fixed value) from the 
+% By way of example, fault_PitchActuator((t > 5) & (t < 50),2) = 1 sets a pitch actuator fault of type 1 (stuck at a fixed value) from the 
 % second 5 to the second 50 of the simularion on the turbine number 2 of the farm.
 
 switch scenario
