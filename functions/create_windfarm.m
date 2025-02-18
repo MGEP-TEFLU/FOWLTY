@@ -150,8 +150,8 @@ S(11,:)                 = sprintf("SimulinkModel               = '%s';",file(1:e
 S(12,:)                 = sprintf("WindCase                    = '%s';",wfile(1:end-4));
 
 if strcmp(turbine(end-5:end),'faulty') ~= 1
-    S(32:34,:)          = [];
-    S(32,:)             = sprintf('faultSignal                 = [tsim zeros(length(tsim),nT)];');
+    S(33:35,:)          = [];
+    S(33,:)             = sprintf('faultSignal                 = [tsim zeros(length(tsim),nT)];');
 end
 
 if exist([path 'init_' file(1:end-2)]) == 0

@@ -36,15 +36,16 @@ set_param([mdlname '/Turbines/Vnacdemux'],'Outputs',Nstr);
 set_param([mdlname '/Turbines/Fexdemux'],'Outputs',Nstr);
 set_param([mdlname '/Turbines/Faultdemux'],'Outputs',Nstr);
 
-set_param([mdlname '/Turbines/Vnacmux'],'Inputs',Nstr);
 set_param([mdlname '/Turbines/Pmux'],'Inputs',Nstr);
-set_param([mdlname '/Turbines/wgenmux'],'Inputs',Nstr);
-set_param([mdlname '/Turbines/auxmux'],'Inputs',Nstr);
-set_param([mdlname '/Turbines/pitchmux'],'Inputs',Nstr);
 set_param([mdlname '/Turbines/CTmux'],'Inputs',Nstr);
+set_param([mdlname '/Turbines/wgenmux'],'Inputs',Nstr);
+set_param([mdlname '/Turbines/vwindmux'],'Inputs',Nstr);
+set_param([mdlname '/Turbines/pitchmux'],'Inputs',Nstr);
 set_param([mdlname '/Turbines/mshaftmux'],'Inputs',Nstr);
-set_param([mdlname '/Turbines/mgenmux'],'Inputs',Nstr);
 set_param([mdlname '/Turbines/mtowmux'],'Inputs',Nstr);
+set_param([mdlname '/Turbines/mgenmux'],'Inputs',Nstr);
+set_param([mdlname '/Turbines/anacmux'],'Inputs',Nstr);
+set_param([mdlname '/Turbines/auxmux'],'Inputs',Nstr);
 
 % % Set toolbox vesion
 % % Fake version atm
@@ -108,12 +109,13 @@ for i = 1:length(farm.turbines)
     add_line([mdlname '/Turbines'],['WT' int2str(i) '/1'],['Pmux/' int2str(i)],'Autorouting','on')
     add_line([mdlname '/Turbines'],['WT' int2str(i) '/2'],['CTmux/' int2str(i)],'Autorouting','on')
     add_line([mdlname '/Turbines'],['WT' int2str(i) '/3'],['wgenmux/' int2str(i)],'Autorouting','on')
-    add_line([mdlname '/Turbines'],['WT' int2str(i) '/4'],['Vnacmux/' int2str(i)],'Autorouting','on')
+    add_line([mdlname '/Turbines'],['WT' int2str(i) '/4'],['vwindmux/' int2str(i)],'Autorouting','on')
     add_line([mdlname '/Turbines'],['WT' int2str(i) '/5'],['pitchmux/' int2str(i)],'Autorouting','on')
     add_line([mdlname '/Turbines'],['WT' int2str(i) '/6'],['mshaftmux/' int2str(i)],'Autorouting','on')
     add_line([mdlname '/Turbines'],['WT' int2str(i) '/7'],['mtowmux/' int2str(i)],'Autorouting','on')
     add_line([mdlname '/Turbines'],['WT' int2str(i) '/8'],['mgenmux/' int2str(i)],'Autorouting','on')
-    add_line([mdlname '/Turbines'],['WT' int2str(i) '/9'],['auxmux/' int2str(i)],'Autorouting','on')
+    add_line([mdlname '/Turbines'],['WT' int2str(i) '/9'],['anacmux/' int2str(i)],'Autorouting','on')
+    add_line([mdlname '/Turbines'],['WT' int2str(i) '/10'],['auxmux/' int2str(i)],'Autorouting','on')
     
     
 % %     Farm controller parameters

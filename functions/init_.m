@@ -17,9 +17,10 @@ nT                          = length(turb.farm.x);
 %% Definition of simulation variables
 tMax                        = wind.SimTime;         % [s] maximum simulation time
 dt                          = wind.Ts;              % [s] Sampling time for the definition of faults
-Ts                          = dt;
 
-tsim                        = (dt:dt:tMax).';        % [s] Vector of the simulation time
+noiseFlag                   = 0;                    % [-] Flag to activate or not measurement noise
+
+tsim                        = (dt:dt:tMax).';       % [s] Vector of the simulation time
     
 %% Wave generation
 Platform                    = load('DeepCWind/SS/DeepCWind.mat');
