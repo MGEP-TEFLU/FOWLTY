@@ -25,7 +25,7 @@ windData.Ua         = 12;                            % [m/s]  New mean wind spee
 % windData.Ts         = 0.01;                         % [s]    New sampling time
 % windData.Ti         = 0.1;                          %        New Turbulence intensity
 % windData.d          = 10;                           % [m]    New grid size
-windData.SimTime    = 35;                            % [s]    New simulation length
+% windData.SimTime    = 35;                           % [s]    New simulation length
 
 %% Creating a new wind field realisation
 % A couple of options

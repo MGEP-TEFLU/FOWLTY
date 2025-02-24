@@ -350,13 +350,23 @@ wt.ctrl.gen.effeciency  = 0.94;
 % % Measurement system values
 % % Fix these values
 wt.meas.Ts              = timestep;
-wt.meas.ballufres       = .01;
-wt.meas.rotres          = .001;
-wt.meas.aneres          = .001;
-wt.meas.genres          = .01;
+wt.meas.pitchres        = 0.01;
+wt.meas.rotres          = 0.001;
+wt.meas.aneres          = 0.001;
+wt.meas.genres          = 0.01;
+wt.meas.nacres          = 0.01;
 wt.meas.delay           = 0.01;
 wt.meas.rottau          = 0.01;
 wt.meas.gentau          = 0.01;
+
+% % Sensors measuring noise levels (P.F. Odgaard & K.E. Johnson, Wind turbine fault detection and fault tolerant control - an enhanced benchmark challenge)
+wt.meas.anenoise        = 0.0071;
+wt.meas.rotSpdnoise     = 1e-4;
+wt.meas.genSpdnoise     = 2e-4;
+wt.meas.genTrqnoise     = 0.9;
+wt.meas.genPwrnoise     = 10;
+wt.meas.pitchnoise      = 1.5e-3;
+wt.meas.nacAccnoise     = 5e-4;
 
 % % Save public values
 pub.rotor.radius        = wt.rotor.radius;
