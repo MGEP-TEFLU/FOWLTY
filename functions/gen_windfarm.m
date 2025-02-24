@@ -133,7 +133,7 @@ set_param([mdlname '/Farm Control'],'UserData',pfarm);
 set_param([mdlname '/Farm Control'],'UserDataPersistent','on');
 
 % % Setup network operator block
-set_param([mdlname '/Network'],'pref',num2str(ptotal*0.8));
+set_param([mdlname '/Network'],'pref',num2str(ptotal));
 set_param([mdlname '/Network'],'maxp',num2str(ptotal));
 set_param([mdlname '/Network'],'minp',num2str(ptotal/5));
 
