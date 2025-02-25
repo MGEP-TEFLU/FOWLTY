@@ -49,5 +49,7 @@ This project has received funding from the European Union’s Horizon 2020 resea
 
 # AUTOMATICALLY ADD TO PATH
 One way to force MATLAB to add FOWLTY files to the path every time it opens is to create a "startup.m" file in the "MATLAB" folder located in "Documents". In that "startup.m" file, write the following line:
+
 addpath(genpath('D:\.........\FOWLTY'))
+
 Make sure to replace 'D:\.........\FOWLTY' with the actual location of the FOWLTY folder on your computer.
