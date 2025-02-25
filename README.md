@@ -8,7 +8,7 @@ For questions, issues, or feedback, users are encouraged to post in the Discussi
 # INSTALLING THE TOOLBOX
 To install and set up the FOWLTY toolbox, follow these steps:
 
-1.- Download the latest version of the toolbox, and add the folder (and subfolders) to the Matlab path. Note that such folders (and subfolders) have to be included in the Matlab path to use FOWLTY, so it is recommended to do it every time Matlab is opened (by, for example, including them using the function "addpath" in Matlab's "startup" function).
+1.- Download the latest version of the toolbox, and add the folder (and subfolders) to the Matlab path. Note that such folders (and subfolders) have to be included in the Matlab path to use FOWLTY, so it is recommended to do it every time Matlab is opened (by, for example, including them using the function "addpath" in Matlab's "startup" function as explained in https://uk.mathworks.com/help/matlab/matlab_env/add-folders-to-matlab-search-path-at-startup.html).
 
 2.- From the folder, run the "install.m" file. After this, restart Matlab. There should be a "FOWLTY" section on the Simulink library browser.
 
