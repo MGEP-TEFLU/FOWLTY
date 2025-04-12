@@ -8,10 +8,10 @@ clearvars
 warning('off')
 
 %% Definition of the simulation case
-dataSet                     = 1;                    % From 1 to 10, each one representing a different wind 
+dataSet                     = 10;                    % From 1 to 10, each one representing a different wind 
                                                     % speed from 5m/s to 23m/s and a different fault scenario
 
-faultFlag                   = 0;                    % 0 or 1 to select between a healthy (0) or a faulty (1) simulation
+faultFlag                   = 1;                    % 0 or 1 to select between a healthy (0) or a faulty (1) simulation
 noiseFlag                   = 0;                    % 0 or 1 to activate (1) or not (0) measurement noise
 
 
@@ -46,6 +46,60 @@ else
 end
 
 [faultSignal,faultOptions]  = faultScenarios(scenario,tsim,nT); 
+
+% faultsDescr -> XY
+%   - X: turbine number
+%   - Y: fault code:
+%      - 1: pitch sensor stuck
+%      - 2: pitch sensor drift
+%      - 3: pitch sensor constant gain
+%      - 4: genenerator power sensor constant gain
+%      - 5: generator speed sensor constant gain
+%      - 6: pitch actuator stuck
+%      - 7: pitch actuator constant offset
+%      - 8: pitch actuator constant gain
+%      - 9: generator actuator constant offset
+
+faultsDescr                 = zeros(1,length(tsim));
+for i = 1:nT
+    for ii = 1:6
+        temp                = unique(nonzeros(faultSignal.signals.values(:,(i-1)*6+ii)));
+        for iii = 1:length(temp)
+            if temp(iii) ~= 0
+                switch ii
+                    case 1      % pitch actuator
+                        switch temp(iii)
+                            case 1      % stuck
+                                faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 1) = i*10 + 6;
+                            case 2      % constant offset
+                                faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 2) = i*10 + 7;
+                            case 4      % constant gain
+                                faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 4) = i*10 + 8;
+                        end
+                    case 2      % pitch sensor
+                        switch temp(iii)
+                            case 1      % stuck
+                                faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 1) = i*10 + 1;
+                            case 3      % drift
+                                faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 3) = i*10 + 2;
+                            case 4      % constant gain
+                                faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 4) = i*10 + 3;
+                        end
+                    case 4      % generator speed sensor (constant gain)
+                        faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 4) = i*10 + 5;
+                    case 5      % generator power sensor (constant gain)
+                        faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 4) = i*10 + 4;
+                    case 6      % generator actuator (constant offset)
+                        faultsDescr(faultSignal.signals.values(:,(i-1)*6+ii) == 2) = i*10 + 9;
+                end
+            end
+        end
+    end
+end
+
+figure
+plot(tsim,faultsDescr,'linewidth',2)
+grid on
 
 %% Run simulink model
 tic

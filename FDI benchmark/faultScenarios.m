@@ -107,14 +107,14 @@ else
     faultOptions.GenActOffset           = randGenActOffset(sc);
 
     fault_PitchSensor((  t > fTimes(sc,1)) & (t < fTimes(sc,1)+fDeltaT(sc,1)),rTurb(sc,1)) = 1;
-    fault_PitchSensor((  t > fTimes(sc,2)) & (t < fTimes(sc,2)+fDeltaT(sc,2)),rTurb(sc,1)) = 3;
-    fault_PitchSensor((  t > fTimes(sc,3)) & (t < fTimes(sc,3)+fDeltaT(sc,3)),rTurb(sc,1)) = 4;
-    fault_GenPSensor((   t > fTimes(sc,4)) & (t < fTimes(sc,4)+fDeltaT(sc,4)),rTurb(sc,1)) = 4;
-    fault_GenSensor((    t > fTimes(sc,5)) & (t < fTimes(sc,5)+fDeltaT(sc,5)),rTurb(sc,1)) = 4;
-    fault_PitchActuator((t > fTimes(sc,6)) & (t < fTimes(sc,6)+fDeltaT(sc,6)),rTurb(sc,1)) = 1;
-    fault_PitchActuator((t > fTimes(sc,7)) & (t < fTimes(sc,7)+fDeltaT(sc,7)),rTurb(sc,1)) = 2;
-    fault_PitchActuator((t > fTimes(sc,8)) & (t < fTimes(sc,8)+fDeltaT(sc,8)),rTurb(sc,1)) = 4;
-    fault_GenActuator((  t > fTimes(sc,9)) & (t < fTimes(sc,9)+fDeltaT(sc,9)),rTurb(sc,1)) = 2;
+    fault_PitchSensor((  t > fTimes(sc,2)) & (t < fTimes(sc,2)+fDeltaT(sc,2)),rTurb(sc,2)) = 3;
+    fault_PitchSensor((  t > fTimes(sc,3)) & (t < fTimes(sc,3)+fDeltaT(sc,3)),rTurb(sc,3)) = 4;
+    fault_GenPSensor((   t > fTimes(sc,4)) & (t < fTimes(sc,4)+fDeltaT(sc,4)),rTurb(sc,4)) = 4;
+    fault_GenSensor((    t > fTimes(sc,5)) & (t < fTimes(sc,5)+fDeltaT(sc,5)),rTurb(sc,5)) = 4;
+    fault_PitchActuator((t > fTimes(sc,6)) & (t < fTimes(sc,6)+fDeltaT(sc,6)),rTurb(sc,6)) = 1;
+    fault_PitchActuator((t > fTimes(sc,7)) & (t < fTimes(sc,7)+fDeltaT(sc,7)),rTurb(sc,7)) = 2;
+    fault_PitchActuator((t > fTimes(sc,8)) & (t < fTimes(sc,8)+fDeltaT(sc,8)),rTurb(sc,8)) = 4;
+    fault_GenActuator((  t > fTimes(sc,9)) & (t < fTimes(sc,9)+fDeltaT(sc,9)),rTurb(sc,9)) = 2;
 end
 
 %% Put all the fault signals together ----------------------------------------------------------------------------------------------
