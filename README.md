@@ -36,6 +36,17 @@ FOWLTY also allows users to define new turbine models by modifying the nrelvals.
 
 For a comprehensive definition of the modeling assumptions and implementation details, users are referred to [1].
 
+# ADDING NEW TURBINE MODELS FROM OPENFAST
+FOWLTY includes a script (openfast2fowlty.m) to generate new turbine models directly from OpenFAST input files. The script reads as much as possible from the OpenFAST model directory (.fst file and associated input files including the ROSCO DISCON.IN controller), but some parameters cannot be extracted automatically and must be set manually. These are clearly indicated in the USER INPUT section at the top of the script, and the script prints a summary to the command window when run, which can be used to verify the extracted values.
+
+To add a new turbine to FOWLTY:
+1. Edit the USER INPUT section at the top of openfast2fowlty.m with the path to the .fst file and the desired turbine name.
+2. Open lib_turbines.slx, duplicate an existing turbine block, and rename it accordingly.
+3. Run openfast2fowlty.m with interactive = true. When prompted, select the new turbine block in the Simulink library and press Enter to save the data into it.
+4. Save and lock the library. The new turbine will now appear as an option when creating wind farm models with the Farm Template.
+
+Pre-generated turbine models are included for the IEA 15MW and IEA 3.4MW reference turbines. The original NREL 5MW model from the FOWLTY benchmark is also included and should not be regenerated.
+
 # REFERENCING THE WORK
 When using the toolbox, please, reference [1] and [2] to acknowledge the work carried out by the authors.
 
