@@ -1,0 +1,42 @@
+#import weio
+from openfast_io.FAST_reader import InputReader_OpenFAST
+import os
+import pandas as pd
+import unittest
+
+FROOT = os.path.dirname( os.path.dirname( os.path.realpath(__file__) ) )
+
+class TestConsistency(unittest.TestCase):
+    def test_nacelle_mass(self):
+        # ElastoDyn vals
+        #ED_mono = weio.read( os.path.join(FROOT, 'OpenFAST', 'IEA-15-240-RWT-Monopile', 'IEA-15-240-RWT-Monopile_ElastoDyn.dat') )
+        #ED_semi = weio.read( os.path.join(FROOT, 'OpenFAST', 'IEA-15-240-RWT-UMaineSemi', 'IEA-15-240-RWT-UMaineSemi_ElastoDyn.dat') )
+        myobj = InputReader_OpenFAST()
+        myobj.FAST_directory = os.path.join(FROOT, 'OpenFAST', 'IEA-15-240-RWT-Monopile')
+        myobj.read_ElastoDyn( os.path.join(myobj.FAST_directory, 'IEA-15-240-RWT-Monopile_ElastoDyn.dat' ) )
+        ED_mono = myobj.fst_vt['ElastoDyn'].copy()
+        
+        myobj.FAST_directory = os.path.join(FROOT, 'OpenFAST', 'IEA-15-240-RWT-UMaineSemi')
+        myobj.read_ElastoDyn( os.path.join(myobj.FAST_directory, 'IEA-15-240-RWT-UMaineSemi_ElastoDyn.dat' ))
+        ED_semi = myobj.fst_vt['ElastoDyn'].copy()
+
+        # Excel tabular data
+        tabdata = pd.read_excel( os.path.join(FROOT, 'Documentation', 'IEA-15-240-RWT_tabular.xlsx'),
+                                 sheet_name='Nacelle Mass Properties', header=0, index_col=0,
+                                 engine='openpyxl')
+        
+        # Check for consistency in nacelle mass props
+        for ED in [ED_mono, ED_semi]:
+            self.assertAlmostEqual(ED['HubMass'], tabdata.loc['Hub_System','Mass'], -3)
+            self.assertAlmostEqual(ED['HubIner'], tabdata.loc['Hub_System','MoI_CoM_xx'], -4)
+            self.assertAlmostEqual(ED['GenIner'], tabdata.loc['generator_rotor','MoI_CoM_xx'], 0)
+            self.assertAlmostEqual(ED['NacMass'], tabdata.loc['Above_yaw','Mass'], -3)
+            self.assertAlmostEqual(ED['NacCMxn'], tabdata.loc['Above_yaw','CoM_TT_x'], 0)
+            self.assertAlmostEqual(ED['NacCMyn'], 0.0, 0)
+            self.assertAlmostEqual(ED['NacCMzn'], tabdata.loc['Above_yaw','CoM_TT_z'], 0)
+            # NacYIner should also have 1/3 of tower yaw inertia
+            self.assertGreater(ED['NacYIner'], tabdata.loc['Above_yaw','MoI_TT_zz'], 0)
+            self.assertAlmostEqual(ED['YawBrMass'], tabdata.loc['yaw','Mass'], -3)
+        
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,48 @@
+name: test
+
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - bcrypt
+  - future
+  - cached-property
+  - chardet
+  - click
+  - coverage
+  - h5py
+  - jinja2
+  - jsonmerge
+  - markupsafe
+  - matplotlib
+  - mock
+  - numexpr
+  - numpy
+  - openfast>=4.1.0
+  - openfast-io>=4.1.0
+  - openpyxl
+  - pandas
+  - paramiko
+  - pip
+  - pyarrow
+  - pynacl
+  - pytest
+  - pytest-cov
+  - psutil
+  - pbr
+  - pytables
+  - rosco>=2.10.1
+  - sshtunnel
+  - simpy
+  - tomli
+  - wisdem>=4.1
+  - xlrd
+  - xlwt
+  - pip:
+    - wetb
+    - orbit-nrel>=1.2.1
+    - windIO>=2.1.1
+    - wombat
+    
