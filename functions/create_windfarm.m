@@ -35,10 +35,17 @@ turbine                 = str{s};
 % Number of rows and columns of turbines. Minimum 4 turbines in row
 num                     = 3;    % Default value
 nGrid                   = max(ceil(sqrt(num)),4);
-turbDist                = 400;
+
+% turbDist                = 400;
+turbDist                = round(10 * rotorRadius / 10) * 10;   % 5D spacing, rounded to nearest 10m
+
 [yvec,xvec]             = meshgrid(0:(nGrid-1),0:(nGrid-1));
-xvec                    = 100 + xvec(1:num)*turbDist;
-yvec                    = yvec(1:num)*turbDist + 100;
+
+% xvec                    = 100 + xvec(1:num)*turbDist;
+% yvec                    = yvec(1:num)*turbDist + 100;
+xvec                    = ceil(rotorRadius / 10) * 10 + xvec(1:num) * turbDist;
+yvec                    = yvec(1:num) * turbDist + ceil(rotorRadius / 10) * 10;
+
 pos                     = [xvec(:) yvec(:)].';
 
 numMast                 = 1;
@@ -69,22 +76,33 @@ while(true)
         err             = errordlg('Specified turbine number and locations do not coincide.','Wind Farm Creator');
         uiwait(err);
         nGrid           = max(ceil(sqrt(num)),4);
-        turbDist        = 400;
+        % turbDist       = 400;
+        turbDist        = round(10 * rotorRadius / 10) * 10;   % 5D spacing, rounded to nearest 10m
+        
         [yvec,xvec]     = meshgrid(0:(nGrid-1),0:(nGrid-1));
-        xvec            = 100 + xvec(1:num)*turbDist;
-        yvec            = yvec(1:num)*turbDist + 100;
+        
+        % xvec            = 100 + xvec(1:num)*turbDist;
+        % yvec            = yvec(1:num)*turbDist + 100;
+        xvec            = ceil(rotorRadius / 10) * 10 + xvec(1:num) * turbDist;
+        yvec            = yvec(1:num) * turbDist + ceil(rotorRadius / 10) * 10;
+
         pos             = [xvec(:) yvec(:)]';
     elseif(isempty(num) || mod(num,1) ~= 0 || num < 0)
         err=errordlg('Not a valid turbine number.','Wind Farm Creator');
         uiwait(err);
     elseif(isempty(pos) || ~isempty(find((size(pos) == [2,num]) == 0,1)) || ~isempty(find(pos < 0,1)) || ~isempty(find(pos(2,:) < rotorRadius)))
-        err=errordlg('Not a valid position matrix. Ensure that all turbines have positive coordinates and y position is at least equal to rotor radius.','Wind Farm Creator');
-        uiwait(err);
+        err             = errordlg(sprintf('Not a valid position matrix. Ensure that all turbines have positive coordinates and y position is at least equal to rotor radius (%.1f m for this turbine). Suggested minimum y offset: %.0f m.', rotorRadius, rotorRadius + 10), 'Wind Farm Creator');        uiwait(err);
         nGrid           = max(ceil(sqrt(num)),4);
-        turbDist        = 400;
+        % turbDist       = 400;
+        turbDist        = round(10 * rotorRadius / 10) * 10;   % 5D spacing, rounded to nearest 10m
+        
         [yvec,xvec]     = meshgrid(0:(nGrid-1),0:(nGrid-1));
-        xvec            = 100 + xvec(1:num)*turbDist;
-        yvec            = yvec(1:num)*turbDist + 100;
+        
+        % xvec            = 100 + xvec(1:num)*turbDist;
+        % yvec            = yvec(1:num)*turbDist + 100;
+        xvec            = ceil(rotorRadius / 10) * 10 + xvec(1:num) * turbDist;
+        yvec            = yvec(1:num) * turbDist + ceil(rotorRadius / 10) * 10;
+        
         pos             = [xvec(:) yvec(:)]';
     elseif(isempty(numMast) || mod(numMast,1) ~= 0 || numMast < 0)
         err=errordlg('Not a valid wind measurement mast number.','Wind Farm Creator');

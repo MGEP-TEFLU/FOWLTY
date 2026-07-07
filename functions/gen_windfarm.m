@@ -29,6 +29,11 @@ mainsys = new_system(mdlname,'model','lib_FOWLTY/Farm Template - Taylor');
 % % Save and break all links in order to modify the new library
 save_system(mainsys,[path mdlfile],'BreakUserLinks',true)
 
+% Break remaining library links for R2026a compatibility
+set_param([mdlname '/Turbines'],   'LinkStatus', 'none');
+set_param([mdlname '/Wind Field'], 'LinkStatus', 'none');
+set_param([mdlname '/Network'],    'LinkStatus', 'none');
+
 % % Setup muxes according to number of turbines
 set_param([mdlname '/Turbines/Pdemanddemux'],'Outputs',Nstr);
 set_param([mdlname '/Turbines/Vrotdemux'],'Outputs',Nstr);
