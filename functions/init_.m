@@ -19,6 +19,7 @@ tMax                        = wind.SimTime;         % [s] maximum simulation tim
 dt                          = wind.Ts;              % [s] Sampling time for the definition of faults
 
 noiseFlag                   = 0;                    % [-] Flag to activate or not measurement noise
+hydroFlag                   = 1;                    % [-] Flag to not consider (with a 0) the hydrodynamic motion of the platform
 
 tsim                        = (dt:dt:tMax).';       % [s] Vector of the simulation time
     
